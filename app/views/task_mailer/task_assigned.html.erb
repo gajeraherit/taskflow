@@ -1,0 +1,16 @@
+<h1>You have been assigned a new task!</h1>
+
+<p>Hi <%= @user.email %>,</p>
+
+<p>A new task has been assigned to you:</p>
+
+<ul>
+  <li><strong>Task:</strong> <%= @task.title %></li>
+  <li><strong>Project:</strong> <%= @project.name %></li>
+  <li><strong>Workspace:</strong> <%= @workspace.name %></li>
+  <li><strong>Priority:</strong> <%= @task.priority %></li>
+  <li><strong>Due Date:</strong> <%= @task.due_date %></li>
+</ul>
+
+<p>Login to view your task:</p>
+<%= link_to "View Task", workspace_project_url(@workspace, @project) %>

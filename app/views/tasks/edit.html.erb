@@ -1,0 +1,43 @@
+<h1>Edit Task</h1>
+
+<%= form_with model: [@workspace, @project, @task] do |f| %>
+  <% if @task.errors.any? %>
+    <div>
+      <% @task.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :title, "Task Title" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :status, "Status" %>
+    <%= f.select :status, [["To Do", "todo"], ["In Progress", "in_progress"], ["Done", "done"]] %>
+  </div>
+
+  <div>
+    <%= f.label :priority, "Priority" %>
+    <%= f.select :priority, [["Low", "low"], ["Medium", "medium"], ["High", "high"]] %>
+  </div>
+
+  <div>
+    <%= f.label :due_date, "Due Date" %>
+    <%= f.date_field :due_date %>
+  </div>
+<div>
+  <%= f.label :attachments, "Attachments" %>
+  <%= f.file_field :attachments, multiple: true %>
+</div>
+  <%= f.submit "Update Task" %>
+<% end %>
+
+<%= link_to "Back to Project", workspace_project_path(@workspace, @project) %>

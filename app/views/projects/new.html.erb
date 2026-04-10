@@ -1,0 +1,23 @@
+<h1>New Project</h1>
+
+<%= form_with model: [@workspace, @project] do |f| %>
+  <% if @project.errors.any? %>
+    <div>
+      <% @project.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, "Project Name" %>
+    <%= f.text_field :name, placeholder: "e.g. Website Redesign" %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description, placeholder: "Describe your project..." %>
+  </div>
+
+  <%= f.submit "Create Project" %>
+<% end %>

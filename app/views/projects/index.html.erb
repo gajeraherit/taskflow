@@ -1,0 +1,15 @@
+<h1>Projects in <%= @workspace.name %></h1>
+
+<%= link_to "New Project", new_workspace_project_path(@workspace) %>
+
+<% if @projects.empty? %>
+  <p>No projects yet. Create one!</p>
+<% else %>
+  <% @projects.each do |project| %>
+    <div>
+      <h3><%= link_to project.name, workspace_project_path(@workspace, project) %></h3>
+      <p><%= project.description %></p>
+      <p>Status: <%= project.status %></p>
+    </div>
+  <% end %>
+<% end %>

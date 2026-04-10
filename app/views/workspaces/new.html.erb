@@ -1,0 +1,18 @@
+<h1>Create New Workspace</h1>
+
+<%= form_with model: @workspace do |f| %>
+  <% if @workspace.errors.any? %>
+    <div>
+      <% @workspace.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, "Workspace Name" %>
+    <%= f.text_field :name, placeholder: "e.g. My Company" %>
+  </div>
+
+  <%= f.submit "Create Workspace" %>
+<% end %>
