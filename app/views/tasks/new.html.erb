@@ -1,38 +1,44 @@
-<h1>New Task</h1>
+<div class="max-w-lg mx-auto bg-white rounded-lg shadow p-8">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">New Task</h1>
 
-<%= form_with model: [@workspace, @project, @task] do |f| %>
-  <% if @task.errors.any? %>
-    <div>
-      <% @task.errors.full_messages.each do |msg| %>
-        <p><%= msg %></p>
-      <% end %>
+  <%= form_with model: [@workspace, @project, @task] do |f| %>
+    <% if @task.errors.any? %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <% @task.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= f.label :title, "Task Title", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_field :title, placeholder: "e.g. Design homepage", class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
     </div>
+
+    <div class="mb-4">
+      <%= f.label :description, "Description", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.text_area :description, placeholder: "Describe the task...", rows: 3, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :priority, "Priority", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.select :priority, [["Low", "low"], ["Medium", "medium"], ["High", "high"]], {}, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.label :due_date, "Due Date", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.date_field :due_date, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.label :attachments, "Attachments", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.file_field :attachments, multiple: true, class: "w-full border border-gray-300 rounded px-3 py-2" %>
+    </div>
+
+    <%= f.submit "Create Task", class: "w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 font-medium cursor-pointer" %>
   <% end %>
 
-  <div>
-    <%= f.label :title, "Task Title" %>
-    <%= f.text_field :title, placeholder: "e.g. Design homepage" %>
+  <div class="mt-4 text-center">
+    <%= link_to "← Back to Project", workspace_project_path(@workspace, @project), class: "text-indigo-600 hover:underline text-sm" %>
   </div>
-
-  <div>
-    <%= f.label :description, "Description" %>
-    <%= f.text_area :description, placeholder: "Describe the task..." %>
-  </div>
-
-  <div>
-    <%= f.label :priority, "Priority" %>
-    <%= f.select :priority, [["Low", "low"], ["Medium", "medium"], ["High", "high"]] %>
-  </div>
-
-  <div>
-    <%= f.label :due_date, "Due Date" %>
-    <%= f.date_field :due_date %>
-  </div>
-<div>
-  <%= f.label :attachments, "Attachments" %>
-  <%= f.file_field :attachments, multiple: true %>
 </div>
-  <%= f.submit "Create Task" %>
-<% end %>
-
-<%= link_to "Back to Project", workspace_project_path(@workspace, @project) %>

@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Taskflow</title>
+    <title>TaskFlow</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p><%= yield %>
+  <body class="bg-gray-100 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-indigo-600 text-white px-6 py-4 flex justify-between items-center shadow-md">
+      <div class="text-xl font-bold tracking-wide">
+        <%= link_to "✅ TaskFlow", root_path, class: "text-white hover:text-indigo-200" %>
+      </div>
+      <div class="flex gap-4 items-center">
+        <% if user_signed_in? %>
+          <span class="text-sm text-indigo-200">👋 <%= current_user.email %></span>
+          <%= link_to "My Workspaces", workspaces_path, class: "text-sm hover:text-indigo-200" %>
+          <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "bg-white text-indigo-600 px-3 py-1 rounded text-sm font-medium hover:bg-indigo-100" %>
+        <% else %>
+          <%= link_to "Sign In", new_user_session_path, class: "text-sm hover:text-indigo-200" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "bg-white text-indigo-600 px-3 py-1 rounded text-sm font-medium hover:bg-indigo-100" %>
+        <% end %>
+      </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="max-w-6xl mx-auto px-4 mt-4">
+      <% if notice %>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+          <%= notice %>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          <%= alert %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-6">
+      <%= yield %>
+    </main>
+
   </body>
 </html>

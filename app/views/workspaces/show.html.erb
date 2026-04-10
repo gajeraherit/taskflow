@@ -1,9 +1,15 @@
-<h1><%= @workspace.name %></h1>
-<p>Members: <%= @workspace.members.count %></p>
-<p>Current Plan: <strong><%= @workspace.current_plan.capitalize %></strong></p>
+<div class="bg-white rounded-lg shadow p-6 mb-6">
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800"><%= @workspace.name %></h1>
+      <p class="text-sm text-gray-500 mt-1">👥 Members: <%= @workspace.members.count %></p>
+      <p class="text-sm text-gray-500">📋 Plan: <span class="font-medium text-indigo-600"><%= @workspace.current_plan.capitalize %></span></p>
+    </div>
+    <div class="flex gap-3">
+      <%= link_to "View Projects", workspace_projects_path(@workspace), class: "bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700" %>
+      <%= link_to "Upgrade Plan", new_workspace_subscription_path(@workspace), class: "bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" %>
+    </div>
+  </div>
+</div>
 
-<%= link_to "View Projects", workspace_projects_path(@workspace) %>
-|
-<%= link_to "Upgrade Plan", new_workspace_subscription_path(@workspace) %>
-<br>
-<%= link_to "Back to Workspaces", workspaces_path %>
+<%= link_to "← Back to Workspaces", workspaces_path, class: "text-indigo-600 hover:underline text-sm" %>

@@ -71,3 +71,5 @@ group :test do
   gem "debug", platforms: %i[ mri windows ]
   gem "minitest", "~> 5.18"
 end
+
+gem "tailwindcss-rails", "~> 4.4"
